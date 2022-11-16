@@ -13,22 +13,6 @@ const refs = {
 }
 
 
-
-// const createMurkUp = infoCountryCard.map(({name:{official: nameOfficial}, capital, population, flags:{svg: flagsIcon}, languages}) => {
-//     return `<svg width="30" height="20">
-//     <use href="${flagsIcon}"></use>
-//   </svg>
-//   <title class="country-name">${nameOfficial}</title>
-//   <ul class="info-list">
-//     <li><p class="info-subtitle">Capital:</p><p class="info-desc">${capital}</p></li>
-//     <li><p class="info-subtitle">Population:</p><p class="info-desc">${population}</p></li>
-//     <li><p class="info-subtitle">Languages:</p><p class="info-desc">${languages}</p></li>
-//   </ul>`
-// }).join('');
-
-
-// refs.infoCounty.insertAdjacentHTML = createMurkUp;
-
 refs.input.addEventListener('input', debounce(onInput, DEBOUNCE_DELAY))
 
 function onInput() {
@@ -60,7 +44,7 @@ function onInput() {
           <ul class="info-list">
             <li><b>Capital:</b> ${capital}</li>
             <li><b>Population:</b> ${population}</li>
-            <li><b>Languages:</b> ${toString(languages.name)}</li>
+            <li><b>Languages:</b> ${toString(languages)}</li>
           </ul>`
         }).join('');
         // console.log(createMurkUpInfo)
@@ -77,10 +61,8 @@ function onInput() {
 }
  
 
-
-
     function fetchCountries(name) {
-      return  fetch(`https://restcountries.com/v3.1/name/${name}`).then(response => {
+      return  fetch(`https://restcountries.com/v3.1/name/${name}?fields=name,capital,population,languages,flags`).then(response => {
            if (!response.ok) {
                setTimeout(() => {
                Notify.failure('Oops, there is no country with that name')
@@ -89,33 +71,4 @@ function onInput() {
            return response.json()})
 }
         
-    //     const createMurkUp = county.map(({name:{official: nameOfficial}, capital, population, flags:{svg: flagsIcon}, languages}) => {
-    //         return `<svg width="30" height="20">
-    //         <use href="${flagsIcon}"></use>
-    //       </svg>
-    //       <title class="country-name">${nameOfficial}</title>
-    //       <ul class="info-list">
-    //         <li><p class="info-subtitle">Capital:</p><p class="info-desc">${capital}</p></li>
-    //         <li><p class="info-subtitle">Population:</p><p class="info-desc">${population}</p></li>
-    //         <li><p class="info-subtitle">Languages:</p><p class="info-desc">${languages}</p></li>
-    //       </ul>`
-    //     }).join('');
-        
-        
-    //    return refs.infoCounty.insertAdjacentHTML = createMurkUp;
-
-        // .catch(error => {
-        //     console.log(error)
-        //     if() {
-        //     Notify.failure('Oops, there is no country with that name')}});
-
-
-// fetchCountries('peru')
-
-
-    // .then(filter => {console.log(filter)
-    //     // fetch(`https://restcountries.com/v2/all?fields=name,capital,currencies`).then(responeF => {
-    //     //     return responeF.json()
-    //     // }).then(countryFilter => {console.log(countryFilter)})
-    // })
 
