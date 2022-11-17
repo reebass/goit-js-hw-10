@@ -9,8 +9,8 @@ const DEBOUNCE_DELAY = 300;
 
 const refs = {
     input: document.querySelector('#search-box'),
-    listCounry: document.querySelector('.country-list'),
-    infoCounty: document.querySelector('.country-info')
+    listCountri: document.querySelector('.country-list'),
+    infoCountri: document.querySelector('.country-info')
 }
 
 
@@ -23,8 +23,8 @@ function onInput() {
     const inputValue = refs.input.value.trim();
     fetchCountries(inputValue, fetchCountriesError).then(totalValueInputMax);
     } else {
-        refs.infoCounty.innerHTML = "";
-        refs.listCounry.innerHTML = "";
+        refs.infoCountri.innerHTML = "";
+        refs.listCountri.innerHTML = "";
     }
 
 }
@@ -34,15 +34,16 @@ function totalValueInputMax(countries) {
         setTimeout(() => {
         Notify.info('Too many matches found. Please enter a more specific name.')
     }, 500)
-        refs.listCounry.innerHTML = "";
+        refs.listCountri.innerHTML = "";
     }
     if(countries.length >= 2 && countries.length <= 10) {
-        refs.infoCounty.innerHTML = "";
-        createMurkUpList(countries);   
+        refs.infoCountri.innerHTML = "";
+        createMurkUpList(countries);
+
     }
 
     if(countries.length === 1) { 
-    refs.listCounry.innerHTML = "";
+    refs.listCountri.innerHTML = "";
     createMurkUpInfo(countries);  
 }}
 
@@ -51,8 +52,8 @@ function totalValueInputMax(countries) {
 
 function fetchCountriesError() {
         Notify.failure('Oops, there is no country with that name')
-        refs.infoCounty.innerHTML = "";
-        refs.listCounry.innerHTML = "";
+        refs.infoCountri.innerHTML = "";
+        refs.listCountri.innerHTML = "";
 }
 
 
@@ -61,7 +62,8 @@ function createMurkUpList(countries) {
     const createMurkUpList = countries.map(({name:{common: nameCommon}, flags:{svg: flagsIcon}}) => {
         return `<li><img src="${flagsIcon}" width="16" height="auto" alt="flagIcon"><p>${nameCommon}</p></li>`
     }).join('')
-    return refs.listCounry.innerHTML = createMurkUpList;
+    return refs.listCountri.innerHTML = createMurkUpList;
+
 }
 
 function createMurkUpInfo (countries) {
@@ -77,7 +79,7 @@ function createMurkUpInfo (countries) {
       </ul>`
     }).join('');
 
-    return refs.infoCounty.innerHTML = createMurkUpInfo;
+    return refs.infoCountri.innerHTML = createMurkUpInfo;
 }
 
 
