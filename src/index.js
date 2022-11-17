@@ -40,6 +40,7 @@ function totalValueInputMax(countries) {
         refs.infoCountri.innerHTML = "";
         createMurkUpList(countries);
 
+
     }
 
     if(countries.length === 1) { 
@@ -61,7 +62,7 @@ function fetchCountriesError() {
 function createMurkUpList(countries) {
     const createMurkUpList = countries.map(({name:{common: nameCommon}, flags:{svg: flagsIcon}}) => {
         return `<li><img src="${flagsIcon}" width="16" height="auto" alt="flagIcon"><p>${nameCommon}</p></li>`
-    }).join('')
+    }).join('');
     return refs.listCountri.innerHTML = createMurkUpList;
 
 }
