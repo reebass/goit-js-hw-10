@@ -16,7 +16,7 @@ body {
   font: inherit;
   padding: 8px;
   max-width: 320px;
-  margin-bottom: 16px;
+  /* margin-bottom: 16px; */
 }
 
 .info-list,
@@ -28,6 +28,8 @@ body {
 
 
 
+
+
 .wrap-title {
   display: flex;
   align-items: center;
@@ -35,14 +37,28 @@ body {
   gap: 10px;
 }
 
-.country-list > li {
+.country-list > li > button {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   gap: 5px;
+
+  background-color: transparent;
+  border: none;
+  margin: 0;
+  padding: 5px 5px 5px 0;
+  width: 100%;
+
+  cursor: pointer;
+
+  transition: color 180ms ease;
 }
 
-.country-list > li > p {
+.country-list > li > button:hover {
+  color: rgb(250, 146, 27);
+}
+
+.country-list > li > button > p {
   margin: 0;
 }
 

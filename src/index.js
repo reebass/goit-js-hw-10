@@ -20,13 +20,23 @@ refs.input.addEventListener('input', debounce(onInput, DEBOUNCE_DELAY))
 
 function onInput() {
     const inputValue = refs.input.value.trim();
-    if(inputValue) {
-    fetchCountries(inputValue).then(totalValueInputMax).catch(fetchCountriesError);
-    } else {
+    if(!inputValue) {
+        refs.infoCountri.innerHTML = "";
+        refs.listCountri.innerHTML = "";
         return
     }
-
+    fetchCountries(inputValue).then(totalValueInputMax).catch(fetchCountriesError);
 }
+
+refs.listCountri.addEventListener('click', onSearch);
+
+function onSearch(evt) {
+    refs.input.value = evt.target.textContent
+    onInput()
+    console.log(refs.input.value)
+}
+
+
 
 function totalValueInputMax(countries) {
     if(countries.length > 10) {
@@ -37,7 +47,7 @@ function totalValueInputMax(countries) {
     }
     if(countries.length >= 2 && countries.length <= 10) {
         refs.infoCountri.innerHTML = "";
-        createMurkUpList(countries);
+        createMurkUpList(countries);     
     }
 
     if(countries.length === 1) { 
@@ -58,7 +68,7 @@ function fetchCountriesError() {
 
 function createMurkUpList(countries) {
     const createMurkUpList = countries.map(({name:{common: nameCommon}, flags:{svg: flagsIcon}}) => {
-        return `<li><img src="${flagsIcon}" width="16" height="auto" alt="flagIcon"><p>${nameCommon}</p></li>`
+        return `<li><button><img src="${flagsIcon}" width="16" height="auto" alt="flagIcon"><p>${nameCommon}</p></button></li>`
     }).join('');
     return refs.listCountri.innerHTML = createMurkUpList;
 
