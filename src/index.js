@@ -19,12 +19,11 @@ refs.input.addEventListener('input', debounce(onInput, DEBOUNCE_DELAY))
 
 
 function onInput() {
-    if(refs.input.value) {
     const inputValue = refs.input.value.trim();
-    fetchCountries(inputValue, fetchCountriesError).then(totalValueInputMax);
+    if(inputValue) {
+    fetchCountries(inputValue).then(totalValueInputMax).catch(fetchCountriesError);
     } else {
-        refs.infoCountri.innerHTML = "";
-        refs.listCountri.innerHTML = "";
+        return
     }
 
 }
@@ -39,8 +38,6 @@ function totalValueInputMax(countries) {
     if(countries.length >= 2 && countries.length <= 10) {
         refs.infoCountri.innerHTML = "";
         createMurkUpList(countries);
-
-
     }
 
     if(countries.length === 1) { 
